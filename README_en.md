@@ -25,8 +25,8 @@ A global crosshair tool for Windows that supports highly customizable parameters
 ## 📌 Installation
 
 ```bash
-git clone <repository_url>
-cd <repository_folder>
+git clone https://github.com/LiebeV/Crosshair.git
+cd Crosshair
 pip install -r requirements.txt
 ```
 
