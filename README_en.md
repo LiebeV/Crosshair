@@ -47,7 +47,7 @@ python crosshair.py
 ### **2️⃣ Crosshair Overlay Mode** (No GUI, direct execution)
 
 ```bash
-python crosshair.py --nogui "<config_str>"
+python crosshair.py --nogui <config_str>
 ```
 
 -   Ideal for quickly loading a preset crosshair without an additional interface.

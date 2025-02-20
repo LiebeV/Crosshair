@@ -47,7 +47,7 @@ python crosshair.py
 ### **2️⃣ 准星覆盖模式**（无 GUI 直接运行）
 
 ```bash
-python crosshair.py --nogui "<config_str>"
+python crosshair.py --nogui <config_str>
 ```
 
 -   适用于快速加载预设准星，无需额外界面。
