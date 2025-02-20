@@ -795,40 +795,54 @@ class CrosshairEditor(QtWidgets.QWidget):
         entry = item.data(QtCore.Qt.UserRole)
         try:
             config = CrosshairConfig.decode(entry["code"])
-            self.config = config
+            
+            # 为防止信号触发干扰，暂时屏蔽信号
+            self.center_group.blockSignals(True)
+            self.outer_frame_group.blockSignals(True)
+            self.outer_cross_group.blockSignals(True)
+            self.advanced_group.blockSignals(True)
+            
+            self.center_group.setChecked(config.center_enabled)
+            self.outer_frame_group.setChecked(config.outer_frame_enabled)
+            self.outer_cross_group.setChecked(config.outer_cross_enabled)
+            self.advanced_group.setChecked(config.advanced_enabled)
+            
+            self.center_group.blockSignals(False)
+            self.outer_frame_group.blockSignals(False)
+            self.outer_cross_group.blockSignals(False)
+            self.advanced_group.blockSignals(False)
+            
+
             self.inner_gap_slider.setValue(config.inner_gap)
             self.inner_length_slider.setValue(config.inner_length)
             self.inner_thickness_slider.setValue(config.inner_thickness)
             self.inner_color_edit.setText(config.inner_color)
             self.inner_opacity_slider.setValue(int(round(config.inner_opacity * 10)))
             self.inner_line_count_slider.setValue(config.inner_line_count)
-            self.center_group.setChecked(config.center_enabled)
+            
             self.center_color_edit.setText(config.center_color)
             self.center_thickness_slider.setValue(config.center_thickness)
-            self.outer_frame_group.setChecked(config.outer_frame_enabled)
+            
             self.outer_frame_color_edit.setText(config.outer_frame_color)
-            self.outer_frame_opacity_slider.setValue(
-                int(round(config.outer_frame_opacity * 10))
-            )
+            self.outer_frame_opacity_slider.setValue(int(round(config.outer_frame_opacity * 10)))
             self.outer_frame_thickness_slider.setValue(config.outer_frame_thickness)
-            self.outer_cross_group.setChecked(config.outer_cross_enabled)
+            
             self.outer_gap_slider.setValue(config.outer_gap)
             self.outer_length_slider.setValue(config.outer_length)
             self.outer_thickness_slider.setValue(config.outer_thickness)
             self.outer_cross_color_edit.setText(config.outer_cross_color)
-            self.outer_cross_opacity_slider.setValue(
-                int(round(config.outer_cross_opacity * 10))
-            )
+            self.outer_cross_opacity_slider.setValue(int(round(config.outer_cross_opacity * 10)))
             self.outer_line_count_slider.setValue(config.outer_line_count)
-            self.advanced_group.setChecked(config.advanced_enabled)
+            
             self.inner_angle_slider.setValue(config.inner_angle_offset)
             self.offsetx_slider.setValue(config.offset_x)
             self.offsety_slider.setValue(config.offset_y)
             self.overall_angle_slider.setValue(config.overall_angle_offset)
-            self.advanced_cap_style_button_group.button(
-                config.advanced_cap_style
-            ).setChecked(True)
-            self.preview.updateConfig(config)
+            self.advanced_cap_style_button_group.button(config.advanced_cap_style).setChecked(True)
+            
+            # 更新当前配置并刷新预览
+            self.config = config
+            self.onParameterChanged()  # 该函数会从控件读取所有值，并更新预览
         except Exception as e:
             QtWidgets.QMessageBox.critical(self, "导入失败", str(e))
 
@@ -981,5 +995,5 @@ def main():
 
 
 if __name__ == "__main__":
-    # version = "0.0.0219"
+    # version = "0.0.0220"
     main()
