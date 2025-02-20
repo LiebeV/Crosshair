@@ -25,8 +25,8 @@ Windows 全局准星工具，支持高度自定义参数和热键操作，提供
 ## 📌 安装
 
 ```bash
-git clone https://github.com/LiebeV/Crosshair.git
-cd Crosshair
+git clone https://github.com/LiebeV/Crosshair-Overlay.git
+cd Crosshair-Overlay
 pip install -r requirements.txt
 ```
 
